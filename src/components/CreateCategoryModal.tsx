@@ -39,14 +39,12 @@ const CreateCategoryModal = ({
       <MyModal isOpen={isOpen} setIsOpen={setIsOpen} title="Add Category">
         <div className="flex flex-col gap-6">
           <input
-            className=" bg-[#F2F2F2] py-3.5 pl-5 pr-4 w-[305px] border-[1px] border-[#FFFFFF] rounded-[8px] outline-none ring-offset-0 focus:outline-1  focus:outline-gray-300 "
+            placeholder="Category Name"
+            className="input"
             onChange={handleInputChange}
             type="text"
           />
-          <button
-            onClick={onSubmit}
-            className=" bg-black text-white py-3.5 pl-5 pr-4 w-[305px] border-[1px] border-[#FFFFFF] rounded-[8px] outline-none ring-offset-0 focus:outline-1  focus:outline-gray-300"
-          >
+          <button onClick={onSubmit} className="btn">
             Save
           </button>
         </div>

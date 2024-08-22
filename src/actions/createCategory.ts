@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
+
 export const createCategory = async (data: any) => {
   const response = await fetch(
     "https://antopolis-tsk-server.vercel.app/api/v1/categories/create-category",
@@ -11,5 +13,6 @@ export const createCategory = async (data: any) => {
       body: JSON.stringify(data),
     }
   );
+  revalidateTag("category");
   return await response.json();
 };

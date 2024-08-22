@@ -1,6 +1,6 @@
 "use client";
 import { TCategory } from "@/type/type";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
 const Categorries = ({
@@ -11,17 +11,22 @@ const Categorries = ({
   activeCategoryName: string;
 }) => {
   const router = useRouter();
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
+  const parmas = new URLSearchParams(searchParams);
+
   const [activeCategory, setActiveCategory] = useState(activeCategoryName);
   const handleActive = (categoryName: string) => {
-    setActiveCategory(categoryName);
-    router.push(`?category=${categoryName}`);
+    setActiveCategory((prev) => (prev = categoryName));
+    parmas.set("category", categoryName);
+
+    router.replace(`${pathName}?${parmas.toString()}`);
   };
   return (
-    <div className="flex gap-6">
+    <div className="flex flex-wrap gap-6">
       {categories?.map((category, index) => (
         <button
           onClick={() => handleActive(category.categoryName)}
-          //   className="px-5 py-3.5 border-[1px] min-w-[100px] border-[#058F34] text-[#058F34] rounded-[100px] font-[400px] text-lg"
           className={`btn-outline ${
             category.categoryName === activeCategory
               ? "border-[#058F34] text-[#058F34]"
